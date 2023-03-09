@@ -15,13 +15,14 @@ import Divider from '@mui/material/Divider';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import FolderIcon from '@mui/icons-material/Folder';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 import AppsIcon from '@mui/icons-material/Apps';
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import CreateIcon from '@mui/icons-material/Create';
+import GrassIcon from '@mui/icons-material/Grass';
 
 const StyledHamburgerMenu = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -75,7 +76,7 @@ const search = (
       <SearchIcon />
     </SearchIconWrapper>
     <StyledInputBase
-      placeholder='Suchen…'
+      placeholder='Search...'
       inputProps={{ 'aria-label': 'search' }}
     />
   </StyledSearch>
@@ -130,7 +131,7 @@ export default function HamburgerMenu(props) {
           sx={{
             p: 2,
             height: 1,
-            backgroundColor: '#dbc8ff',
+            backgroundColor: '#efe6ef',
           }}
         >
           <IconButton sx={{ mb: 2 }} onClick={closeDrawer}>
@@ -142,30 +143,40 @@ export default function HamburgerMenu(props) {
           <Box sx={{ mb: 2 }}>
             <ListItemButton button onClick={() => handleNavigation('/main')}>
               <ListItemIcon>
-                <AppsIcon sx={{ color: 'primary.main' }} />
+                <AppsIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>
               <ListItemText primary='Dashboard' />
             </ListItemButton>
 
-            <ListItemButton>
+            <ListItemButton
+              button
+              onClick={() => handleNavigation('/calendar')}
+            >
               <ListItemIcon>
-                <WatchLaterIcon sx={{ color: 'primary.main' }} />
+                <ScheduleIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>
               <ListItemText primary='Calendar' />
             </ListItemButton>
 
-            <ListItemButton button onClick={() => handleNavigation('/cloud')}>
+            <ListItemButton button onClick={() => handleNavigation('/')}>
               <ListItemIcon>
-                <SportsCricketIcon sx={{ color: 'primary.main' }} />
+                <CreateIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>
-              <ListItemText primary='Cloud Click' />
+              <ListItemText primary='Journal' />
             </ListItemButton>
 
-            <ListItemButton>
+            <ListItemButton button onClick={() => handleNavigation('/')}>
               <ListItemIcon>
-                <FolderIcon sx={{ color: 'primary.main' }} />
+                <GrassIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>
-              <ListItemText primary='Other' />
+              <ListItemText primary='Meditate' />
+            </ListItemButton>
+
+            <ListItemButton button onClick={() => handleNavigation('/cloud')}>
+              <ListItemIcon>
+                <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
+              </ListItemIcon>
+              <ListItemText primary='Cloud Click' />
             </ListItemButton>
           </Box>
 
@@ -181,7 +192,7 @@ export default function HamburgerMenu(props) {
               transform: 'translate(-50%, 0)',
             }}
           >
-            <Button variant='contained' sx={{ m: 1, width: 0.5 }}>
+            <Button variant='outlined' sx={{ m: 1, width: 0.5 }}>
               Randomize
             </Button>
             {user ? (

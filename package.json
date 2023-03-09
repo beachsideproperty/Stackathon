@@ -39,6 +39,7 @@
     "pixi-particles": "^4.3.1",
     "pixi.js": "^7.1.4",
     "react-bootstrap": "^2.7.2",
+    "react-calendar": "^4.0.0",
     "react-test-renderer": "^18.2.0",
     "sequelize": "^6.20.0",
     "stripe": "^11.13.0",

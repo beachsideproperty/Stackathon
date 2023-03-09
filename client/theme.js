@@ -1,0 +1,43 @@
+import { createTheme } from '@mui/material/styles';
+
+const myCustomPalette = {
+  primary: {
+    main: '#4C3670',
+  },
+  secondary: {
+    main: '#5a7036',
+  },
+  common: {
+    black: '#000',
+    white: '#fff',
+  },
+  error: {
+    main: '#ff1744',
+  },
+  warning: {
+    main: '#ff9100',
+  },
+  info: {
+    main: '#2196f3',
+  },
+  success: {
+    main: '#4caf50',
+  },
+  analogous: {
+    main1: '#363d70',
+    main2: '#363d70',
+  },
+  triadic: {
+    main1: '#70365a',
+    main2: '#704c36',
+  },
+  complementary: {
+    main: '#5a7036',
+  },
+};
+
+const theme = createTheme({
+  palette: myCustomPalette,
+});
+
+export default theme;
