@@ -5,5 +5,15 @@ import Navbar from './Navbar';
 import CloudGame from './CloudGame';
 import CalendarPage from './CalendarPage';
 import Meditate from './Meditate';
+import Journal from './Journal';
 
-export { AuthForm, Home, Main, Navbar, CloudGame, CalendarPage, Meditate };
+export {
+  AuthForm,
+  Home,
+  Main,
+  Navbar,
+  CloudGame,
+  CalendarPage,
+  Meditate,
+  Journal,
+};

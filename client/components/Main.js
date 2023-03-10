@@ -1,16 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Box, Typography } from '@mui/material';
 
 export const Main = () => {
   const user = useSelector((state) => state.auth.user);
   return (
-    <div>
-      <div className='banner'>
-        <h2>
-          {user ? `Welcome back, ${user.firstName}!` : 'Browse all products'}
-        </h2>
-      </div>
-    </div>
+    <Box>
+      <Typography>
+        {user ? `Welcome back, ${user.firstName}!` : 'Browse all products'}
+      </Typography>
+    </Box>
   );
 };
 

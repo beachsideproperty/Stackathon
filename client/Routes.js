@@ -8,6 +8,7 @@ import {
   CloudGame,
   CalendarPage,
   Meditate,
+  Journal,
 } from './components';
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
@@ -34,6 +35,7 @@ const Router = ({}) => {
       <Routes>
         <Route exact path='/login' element={<AuthForm mode='login' />} />
         <Route exact path='/signup' element={<AuthForm mode='signup' />} />
+        <Route path='/journal' element={<Journal />} />
         <Route path='/meditate' element={<Meditate />} />
         <Route path='/calendar' element={<CalendarPage />} />
         <Route path='/cloud' element={<CloudGame />} />

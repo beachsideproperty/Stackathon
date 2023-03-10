@@ -5,6 +5,9 @@ import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
 import HamburgerMenu from './HamburgerMenu.js';
 import { setUser } from '../../store';
 import { removeUserToken } from '../../utils';
+import HomeIcon from '@mui/icons-material/Home';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -27,15 +30,25 @@ const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position='static'
         sx={{
-          backgroundColor: 'primary',
-          borderRadius: '10px',
-          opacity: 0.9,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: 'transparent',
+          zIndex: 1,
+          boxShadow: 'none',
         }}
+        elevation={0}
       >
         <Toolbar>
           <HamburgerMenu toggleDrawer={toggleDrawer} />
+          <IconButton
+            sx={{ color: '#FFFFFF', opacity: 1 }}
+            onClick={() => navigate('/')}
+          >
+            <HomeIcon />
+          </IconButton>
           <Typography variant='h6' sx={{ flexGrow: 1 }}>
             progression of chords
           </Typography>

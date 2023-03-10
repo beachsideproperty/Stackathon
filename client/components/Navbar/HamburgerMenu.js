@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../store';
 import { removeUserToken } from '../../utils';
 
@@ -158,7 +158,7 @@ export default function HamburgerMenu(props) {
               <ListItemText primary='Calendar' />
             </ListItemButton>
 
-            <ListItemButton button onClick={() => handleNavigation('/')}>
+            <ListItemButton button onClick={() => handleNavigation('/journal')}>
               <ListItemIcon>
                 <CreateIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>
