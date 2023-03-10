@@ -23,13 +23,15 @@ const Navbar = () => {
 
     setOpen(!open);
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position='static'
         sx={{
-          backgroundColor: '#4c3670',
+          backgroundColor: 'primary',
           borderRadius: '10px',
+          opacity: 0.9,
         }}
       >
         <Toolbar>

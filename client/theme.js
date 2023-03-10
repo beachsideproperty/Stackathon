@@ -6,6 +6,7 @@ const myCustomPalette = {
   },
   secondary: {
     main: '#5a7036',
+    main2: '#7c9246',
   },
   common: {
     black: '#000',
@@ -28,7 +29,7 @@ const myCustomPalette = {
     main2: '#363d70',
   },
   triadic: {
-    main1: '#70365a',
+    main1: '#ae4172',
     main2: '#704c36',
   },
   complementary: {

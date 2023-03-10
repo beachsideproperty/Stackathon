@@ -22,7 +22,7 @@ import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 import AppsIcon from '@mui/icons-material/Apps';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import CreateIcon from '@mui/icons-material/Create';
-import GrassIcon from '@mui/icons-material/Grass';
+import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 
 const StyledHamburgerMenu = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -165,9 +165,12 @@ export default function HamburgerMenu(props) {
               <ListItemText primary='Journal' />
             </ListItemButton>
 
-            <ListItemButton button onClick={() => handleNavigation('/')}>
+            <ListItemButton
+              button
+              onClick={() => handleNavigation('/meditate')}
+            >
               <ListItemIcon>
-                <GrassIcon sx={{ color: 'analogous.main2' }} />
+                <SelfImprovementIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>
               <ListItemText primary='Meditate' />
             </ListItemButton>
@@ -201,7 +204,7 @@ export default function HamburgerMenu(props) {
                 onClick={() => {
                   dispatch(setUser(null));
                   removeUserToken();
-                  navigate('/');
+                  handleNavigation('/');
                 }}
                 sx={{ m: 1, width: 0.5 }}
               >
@@ -210,8 +213,7 @@ export default function HamburgerMenu(props) {
             ) : (
               <Button
                 variant='outlined'
-                component={Link}
-                to='/login'
+                onClick={() => handleNavigation('/login')}
                 sx={{ m: 1, width: 0.5 }}
               >
                 Login

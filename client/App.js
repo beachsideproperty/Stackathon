@@ -1,13 +1,14 @@
 import React from 'react';
 import { Navbar } from './components';
 import Router from './Routes';
+import { Box } from '@mui/material';
 
 const App = () => {
   return (
-    <div>
+    <Box>
       <Navbar />
       <Router />
-    </div>
+    </Box>
   );
 };
 
