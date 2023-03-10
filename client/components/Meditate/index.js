@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Timer from './Timer';
 import videoMeditate from '../../snow_meditate.mp4';
 
-export const Meditate = () => {
+const Meditate = () => {
   return (
     <Box
       sx={{

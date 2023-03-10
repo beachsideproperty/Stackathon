@@ -179,7 +179,7 @@ export default function HamburgerMenu(props) {
               <ListItemIcon>
                 <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>
-              <ListItemText primary='Cloud Click' />
+              <ListItemText primary='Cloud Game' />
             </ListItemButton>
           </Box>
 

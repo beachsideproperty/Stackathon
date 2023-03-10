@@ -75,6 +75,7 @@ const Timer = (props) => {
     bird.addEventListener('ended', handleAudioEnded);
     return () => {
       bird.removeEventListener('ended', handleAudioEnded);
+      bird.pause();
     };
   }, []);
 
@@ -93,7 +94,7 @@ const Timer = (props) => {
           variant='h1'
           sx={{
             color: '#ccdb90',
-            fontSize: '3rem',
+            fontSize: '2rem',
             textAlign: 'center',
             margin: '0',
           }}

@@ -9,7 +9,8 @@ import {
   updateEntry,
 } from './EntryManager';
 import getMoods from './Moods';
-import { Container, Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
+import rocks from '../../rocks.png';
 
 const Journal = () => {
   const [entries, setEntries] = useState([]);
@@ -50,21 +51,50 @@ const Journal = () => {
   };
 
   return (
-    <Container maxWidth='lg'>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <EntryForm entry={entry} moods={moods} onFormSubmit={onFormSubmit} />
+    <Box
+      sx={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflow: 'hidden',
+        backgroundImage: `url(${rocks})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+          padding: '2rem',
+          maxWidth: '800px',
+          margin: '0 auto',
+        }}
+      >
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <EntryForm
+              entry={entry}
+              moods={moods}
+              onFormSubmit={onFormSubmit}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <EntryList
+              entries={entries}
+              moods={moods}
+              onEditButtonClick={onEditButtonClick}
+              onDeleteButtonClick={onDeleteButtonClick}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <EntryList
-            entries={entries}
-            moods={moods}
-            onEditButtonClick={onEditButtonClick}
-            onDeleteButtonClick={onDeleteButtonClick}
-          />
-        </Grid>
-      </Grid>
-    </Container>
+      </Box>
+    </Box>
   );
 };
 

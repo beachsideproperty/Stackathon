@@ -6,7 +6,6 @@ import HamburgerMenu from './HamburgerMenu.js';
 import { setUser } from '../../store';
 import { removeUserToken } from '../../utils';
 import HomeIcon from '@mui/icons-material/Home';
-import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
 const Navbar = () => {
@@ -25,6 +24,10 @@ const Navbar = () => {
     }
 
     setOpen(!open);
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -55,7 +58,6 @@ const Navbar = () => {
           {user ? (
             <Button
               color='inherit'
-              component={Link}
               onClick={() => {
                 dispatch(setUser(null));
                 removeUserToken();
@@ -65,7 +67,7 @@ const Navbar = () => {
               Logout
             </Button>
           ) : (
-            <Button color='inherit' component={Link} to='/login'>
+            <Button color='inherit' onClick={handleLogin}>
               Login
             </Button>
           )}
