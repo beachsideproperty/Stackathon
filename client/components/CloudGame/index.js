@@ -10,11 +10,9 @@ const CloudGame = () => {
   useEffect(() => {
     const iframe = document.createElement('iframe');
     iframe.src = 'http://localhost:3000/game/index.html';
-    iframe.width = 600;
-    iframe.height = 360;
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
     iframe.style.border = 'none';
-    iframe.style.display = 'block';
-    iframe.style.margin = 'auto';
 
     const container = containerRef.current;
     container.appendChild(iframe);
@@ -48,8 +46,8 @@ const CloudGame = () => {
   }, []);
 
   return (
-    <Paper sx={{ maxWidth: 'xl', margin: 'auto', p: 2 }}>
-      <Box id='pixi-canvas-container' ref={containerRef}></Box>
+    <Paper sx={{ maxWidth: 'xl', margin: 'auto', p: 1, boxShadow: 'none' }}>
+      <Box ref={containerRef} sx={{ width: '100%', height: '75vh' }}></Box>
     </Paper>
   );
 };

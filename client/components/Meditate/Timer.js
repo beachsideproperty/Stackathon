@@ -9,6 +9,11 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import Typography from '@mui/material/Typography';
+import chimeSound from '../../chimeSound.mp3';
+import birdMusic from '../../birdMusic.mp3';
+
+const chime = new Audio(chimeSound);
+const bird = new Audio(birdMusic);
 
 const Timer = (props) => {
   const { initialMinute = 0, initialSeconds = 0 } = props;
@@ -16,6 +21,7 @@ const Timer = (props) => {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [runTimer, setRunTimer] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
+  const [isMusic, setIsMusic] = useState(false);
 
   useEffect(() => {
     let myInterval;
@@ -39,36 +45,55 @@ const Timer = (props) => {
     return () => {
       clearInterval(myInterval);
     };
-  }, [minutes, seconds, runTimer]);
+  }, [minutes, seconds, runTimer, chime, bird]);
 
   const resetTimer = () => {
     setMinutes(initialMinute);
     setSeconds(initialSeconds);
     setRunTimer(false);
     setTimerFinished(false);
+    setIsMusic(false);
+    chime.pause();
   };
 
+  const toggleMusic = () => {
+    if (isMusic) {
+      setIsMusic(false);
+      bird.pause();
+    } else {
+      setIsMusic(true);
+      bird.play();
+    }
+  };
+
+  const handleAudioEnded = () => {
+    bird.currentTime = 0;
+    bird.play();
+  };
+
+  useEffect(() => {
+    bird.addEventListener('ended', handleAudioEnded);
+    return () => {
+      bird.removeEventListener('ended', handleAudioEnded);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (timerFinished) {
+      chime.play();
+    }
+  }, [timerFinished]);
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        background: 'linear-gradient(to bottom right, #00bcd4, #4caf50)',
-      }}
-    >
+    <>
       {timerFinished ? (
         <SelfImprovementIcon size='large' sx={{ color: 'secondary.main2' }} />
       ) : (
         <Typography
           variant='h1'
           sx={{
-            fontFamily: 'Roboto',
-            fontSize: '6rem',
-            color: 'white',
-            textShadow: '2px 2px #000000',
+            color: '#ccdb90',
+            fontSize: '3rem',
             textAlign: 'center',
             margin: '0',
           }}
@@ -77,39 +102,46 @@ const Timer = (props) => {
           {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
         </Typography>
       )}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
+        <Tooltip title={runTimer ? 'Pause' : 'Play'}>
+          <IconButton
+            aria-label='play'
+            onClick={() => setRunTimer((prevState) => !prevState)}
+            color='secondary'
+            size='large'
+          >
+            {runTimer ? <PauseIcon /> : <PlayArrowIcon />}
+          </IconButton>
+        </Tooltip>
 
-      <Tooltip title={runTimer ? 'Pause' : 'Play'}>
-        <IconButton
-          aria-label='play'
-          onClick={() => setRunTimer((prevState) => !prevState)}
-          color='secondary'
-          size='large'
-        >
-          {runTimer ? <PauseIcon /> : <PlayArrowIcon />}
-        </IconButton>
-      </Tooltip>
+        <Tooltip title={isMusic ? 'Pause Music' : 'Play Music'}>
+          <IconButton
+            aria-label='music'
+            onClick={toggleMusic}
+            sx={{ color: 'triadic.main1' }}
+            size='large'
+          >
+            <HeadphonesIcon />
+          </IconButton>
+        </Tooltip>
 
-      <Tooltip title='Play music'>
-        <IconButton
-          aria-label='music'
-          sx={{ color: 'triadic.main1' }}
-          size='large'
-        >
-          <HeadphonesIcon />
-        </IconButton>
-      </Tooltip>
-
-      <Tooltip title='Reset'>
-        <IconButton
-          aria-label='reset'
-          onClick={resetTimer}
-          sx={{ color: 'analogous.main2' }}
-          size='large'
-        >
-          <UndoIcon />
-        </IconButton>
-      </Tooltip>
-    </Box>
+        <Tooltip title='Reset'>
+          <IconButton
+            aria-label='reset'
+            onClick={resetTimer}
+            sx={{ color: 'analogous.main2' }}
+            size='large'
+          >
+            <UndoIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
+    </>
   );
 };
 
