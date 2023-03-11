@@ -46,31 +46,13 @@ const Navbar = () => {
       >
         <Toolbar>
           <HamburgerMenu toggleDrawer={toggleDrawer} />
-          <IconButton
-            sx={{ color: '#FFFFFF', opacity: 1 }}
+          <Typography
+            variant='h6'
             onClick={() => navigate('/')}
+            sx={{ flexGrow: 1 }}
           >
-            <HomeIcon />
-          </IconButton>
-          <Typography variant='h6' sx={{ flexGrow: 1 }}>
             progression of chords
           </Typography>
-          {user ? (
-            <Button
-              color='inherit'
-              onClick={() => {
-                dispatch(setUser(null));
-                removeUserToken();
-                navigate('/');
-              }}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button color='inherit' onClick={handleLogin}>
-              Login
-            </Button>
-          )}
         </Toolbar>
       </AppBar>
     </Box>

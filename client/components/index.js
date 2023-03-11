@@ -1,5 +1,5 @@
 import { AuthForm } from './AuthForm';
-import { Main } from './Main';
+import { Dashboard } from './Dashboard';
 import Home from './Home';
 import Navbar from './Navbar';
 import CloudGame from './CloudGame';
@@ -10,7 +10,7 @@ import Journal from './Journal';
 export {
   AuthForm,
   Home,
-  Main,
+  Dashboard,
   Navbar,
   CloudGame,
   CalendarPage,

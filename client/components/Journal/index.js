@@ -68,12 +68,13 @@ const Journal = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           minHeight: '100vh',
           padding: '2rem',
           maxWidth: '800px',
           margin: '0 auto',
+          marginTop: '40px',
         }}
       >
         <Grid container spacing={3}>

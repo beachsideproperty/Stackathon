@@ -64,16 +64,17 @@ const CloudGame = () => {
           height: 'auto',
           transform: 'translate(-50%, -50%)',
         },
-        // '&:before': {
-        //   content: '""',
-        //   position: 'absolute',
-        //   top: 0,
-        //   left: 0,
-        //   right: 0,
-        //   bottom: 0,
-        //   backgroundColor: 'rgba(255, 192, 203, 0.2)',
-        //   zIndex: 1,
-        // },
+        '&:before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(75, 30, 130, 0.2)',
+          zIndex: 1,
+          pointerEvents: 'none',
+        },
       }}
     >
       <video
@@ -95,15 +96,25 @@ const CloudGame = () => {
           boxShadow: 'none',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           minHeight: '100vh',
           padding: '2rem',
           maxWidth: '800px',
           margin: 'auto',
+          marginTop: '40px',
         }}
       >
-        <Box ref={containerRef} sx={{ width: '100%', height: '75vh' }}></Box>
+        <Box
+          ref={containerRef}
+          sx={{
+            width: '90vw',
+
+            aspectRatio: '16 / 9',
+            border: '2px solid pink',
+            boxSizing: 'border-box',
+          }}
+        ></Box>
       </Box>
     </Box>
   );

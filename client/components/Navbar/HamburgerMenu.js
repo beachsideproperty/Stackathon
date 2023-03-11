@@ -131,7 +131,7 @@ export default function HamburgerMenu(props) {
           sx={{
             p: 2,
             height: 1,
-            backgroundColor: '#efe6ef',
+            backgroundColor: '#f1e8f4',
           }}
         >
           <IconButton sx={{ mb: 2 }} onClick={closeDrawer}>
@@ -141,7 +141,10 @@ export default function HamburgerMenu(props) {
           <Divider sx={{ mb: 2 }} />
 
           <Box sx={{ mb: 2 }}>
-            <ListItemButton button onClick={() => handleNavigation('/main')}>
+            <ListItemButton
+              button
+              onClick={() => handleNavigation('/dashboard')}
+            >
               <ListItemIcon>
                 <AppsIcon sx={{ color: 'analogous.main2' }} />
               </ListItemIcon>

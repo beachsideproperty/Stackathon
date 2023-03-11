@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import {
   AuthForm,
   Home,
-  Main,
+  Dashboard,
   CloudGame,
   CalendarPage,
   Meditate,
@@ -26,7 +26,7 @@ const Router = ({}) => {
   if (user && user.role === 'admin') {
     return (
       <Routes>
-        <Route path='/main' element={<Main />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='*' element={<Home />} />
       </Routes>
     );
@@ -39,7 +39,7 @@ const Router = ({}) => {
         <Route path='/meditate' element={<Meditate />} />
         <Route path='/calendar' element={<CalendarPage />} />
         <Route path='/cloud' element={<CloudGame />} />
-        <Route path='/main' element={<Main />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='*' element={<Home />} />
       </Routes>
     );
