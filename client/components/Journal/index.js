@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useNavigate } from 'react-router-dom';
 import MoodForm from './MoodForm';
 import calendarVideo from '../../calendarVideo.mp4';
+import { fetchAllMoods } from '../../store/slices/moods';
+import { format } from 'date-fns';
 
 const Journal = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState(new Date());
+  const [formattedDate, setFormattedDate] = useState('');
   const user = useSelector((state) => state.auth.user);
+  const moods = useSelector((state) => state.moods.moods);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const formattedDate = format(value, 'yyyy-MM-dd');
+    setFormattedDate(formattedDate);
+    dispatch(fetchAllMoods(formattedDate));
+  }, [value]);
 
   const handleDateChange = (newValue) => {
     setValue(newValue);
-    const formattedDate = newValue.toISOString().slice(0, 10);
+    const newFormattedDate = newValue.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    setFormattedDate(newFormattedDate);
   };
 
   if (!user) {
@@ -76,7 +92,7 @@ const Journal = () => {
               onChange={handleDateChange}
               textFieldProps={{ variant: 'outlined' }}
             />
-            <MoodForm />
+            <MoodForm formattedDate={formattedDate} />
           </Box>
         </LocalizationProvider>
       </Box>
