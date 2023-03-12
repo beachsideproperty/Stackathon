@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import HamburgerMenu from './HamburgerMenu.js';
-import { setUser } from '../../store';
-import { removeUserToken } from '../../utils';
-import HomeIcon from '@mui/icons-material/Home';
-import IconButton from '@mui/material/IconButton';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
   const [open, setOpen] = useState(false);
@@ -24,10 +19,6 @@ const Navbar = () => {
     }
 
     setOpen(!open);
-  };
-
-  const handleLogin = () => {
-    navigate('/login');
   };
 
   return (

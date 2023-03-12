@@ -1,54 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import EntryForm from './EntryForm';
-import EntryList from './EntryList';
-import {
-  addEntry,
-  deleteEntry,
-  getEntries,
-  getEntryById,
-  updateEntry,
-} from './EntryManager';
-import getMoods from './Moods';
-import { Grid, Box } from '@mui/material';
-import rocks from '../../rocks.png';
+import React, { useState } from 'react';
+import { Box } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
+import { useSelector } from 'react-redux';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { useNavigate } from 'react-router-dom';
+import MoodForm from './MoodForm';
+import calendarVideo from '../../calendarVideo.mp4';
 
 const Journal = () => {
-  const [entries, setEntries] = useState([]);
-  const [moods, setMoods] = useState([]);
-  const [entry, setEntry] = useState({});
+  const navigate = useNavigate();
+  const [value, setValue] = useState(new Date());
+  const user = useSelector((state) => state.auth.user);
 
-  useEffect(() => {
-    getAllEntries();
-    getMoods().then((moodsData) => setMoods(moodsData));
-  }, []);
-
-  const getAllEntries = () => {
-    getEntries().then((entriesData) => setEntries(entriesData));
+  const handleDateChange = (newValue) => {
+    setValue(newValue);
+    const formattedDate = newValue.toISOString().slice(0, 10);
   };
 
-  const onEditButtonClick = (entryId) => {
-    getEntryById(entryId)
-      .then((entryData) => setEntry(entryData))
-      .then(() => console.log(entry));
-  };
-
-  const onDeleteButtonClick = (entryId) => {
-    deleteEntry(entryId).then(getAllEntries);
-  };
-
-  const onFormSubmit = (entryData) => {
-    console.log('submit', entryData);
-    if (entryData.id) {
-      updateEntry(entryData).then(getAllEntries);
-    } else {
-      addEntry(entryData).then(getAllEntries);
-    }
-    setEntry({
-      concept: '',
-      entry: '',
-      moodId: 0,
-    });
-  };
+  if (!user) {
+    navigate('/');
+  }
 
   return (
     <Box
@@ -59,11 +31,30 @@ const Journal = () => {
         right: 0,
         bottom: 0,
         overflow: 'hidden',
-        backgroundImage: `url(${rocks})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        '& video': {
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          minWidth: '100%',
+          minHeight: '100%',
+          width: 'auto',
+          height: 'auto',
+          transform: 'translate(-50%, -50%)',
+        },
       }}
     >
+      <video
+        src={calendarVideo}
+        autoPlay
+        loop
+        muted
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          zIndex: -1,
+        }}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -77,23 +68,17 @@ const Journal = () => {
           marginTop: '40px',
         }}
       >
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <EntryForm
-              entry={entry}
-              moods={moods}
-              onFormSubmit={onFormSubmit}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Box>
+            <DatePicker
+              label='Pick a date'
+              value={value}
+              onChange={handleDateChange}
+              textFieldProps={{ variant: 'outlined' }}
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <EntryList
-              entries={entries}
-              moods={moods}
-              onEditButtonClick={onEditButtonClick}
-              onDeleteButtonClick={onDeleteButtonClick}
-            />
-          </Grid>
-        </Grid>
+            <MoodForm />
+          </Box>
+        </LocalizationProvider>
       </Box>
     </Box>
   );

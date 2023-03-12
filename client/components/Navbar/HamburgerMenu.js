@@ -140,51 +140,75 @@ export default function HamburgerMenu(props) {
 
           <Divider sx={{ mb: 2 }} />
 
-          <Box sx={{ mb: 2 }}>
-            <ListItemButton
-              button
-              onClick={() => handleNavigation('/dashboard')}
-            >
-              <ListItemIcon>
-                <AppsIcon sx={{ color: 'analogous.main2' }} />
-              </ListItemIcon>
-              <ListItemText primary='Dashboard' />
-            </ListItemButton>
+          {user ? (
+            <Box sx={{ mb: 2 }}>
+              <ListItemButton
+                button
+                onClick={() => handleNavigation('/dashboard')}
+              >
+                <ListItemIcon>
+                  <AppsIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Dashboard' />
+              </ListItemButton>
 
-            <ListItemButton
-              button
-              onClick={() => handleNavigation('/calendar')}
-            >
-              <ListItemIcon>
-                <ScheduleIcon sx={{ color: 'analogous.main2' }} />
-              </ListItemIcon>
-              <ListItemText primary='Calendar' />
-            </ListItemButton>
+              <ListItemButton
+                button
+                onClick={() => handleNavigation('/calendar')}
+              >
+                <ListItemIcon>
+                  <ScheduleIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Calendar' />
+              </ListItemButton>
 
-            <ListItemButton button onClick={() => handleNavigation('/journal')}>
-              <ListItemIcon>
-                <CreateIcon sx={{ color: 'analogous.main2' }} />
-              </ListItemIcon>
-              <ListItemText primary='Journal' />
-            </ListItemButton>
+              <ListItemButton
+                button
+                onClick={() => handleNavigation('/journal')}
+              >
+                <ListItemIcon>
+                  <CreateIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Journal' />
+              </ListItemButton>
 
-            <ListItemButton
-              button
-              onClick={() => handleNavigation('/meditate')}
-            >
-              <ListItemIcon>
-                <SelfImprovementIcon sx={{ color: 'analogous.main2' }} />
-              </ListItemIcon>
-              <ListItemText primary='Meditate' />
-            </ListItemButton>
+              <ListItemButton
+                button
+                onClick={() => handleNavigation('/meditate')}
+              >
+                <ListItemIcon>
+                  <SelfImprovementIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Meditate' />
+              </ListItemButton>
 
-            <ListItemButton button onClick={() => handleNavigation('/cloud')}>
-              <ListItemIcon>
-                <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
-              </ListItemIcon>
-              <ListItemText primary='Cloud Game' />
-            </ListItemButton>
-          </Box>
+              <ListItemButton button onClick={() => handleNavigation('/cloud')}>
+                <ListItemIcon>
+                  <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Cloud Game' />
+              </ListItemButton>
+            </Box>
+          ) : (
+            <Box sx={{ mb: 2 }}>
+              <ListItemButton
+                button
+                onClick={() => handleNavigation('/meditate')}
+              >
+                <ListItemIcon>
+                  <SelfImprovementIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Meditate' />
+              </ListItemButton>
+
+              <ListItemButton button onClick={() => handleNavigation('/cloud')}>
+                <ListItemIcon>
+                  <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Cloud Game' />
+              </ListItemButton>
+            </Box>
+          )}
 
           {search}
 
@@ -198,9 +222,25 @@ export default function HamburgerMenu(props) {
               transform: 'translate(-50%, 0)',
             }}
           >
-            <Button variant='outlined' sx={{ m: 1, width: 0.5 }}>
-              Randomize
-            </Button>
+            {user ? (
+              <Button
+                variant='outlined'
+                onClick={() => {
+                  handleNavigation('/dashboard');
+                }}
+                sx={{ m: 1, width: 0.5 }}
+              >
+                Account
+              </Button>
+            ) : (
+              <Button
+                variant='outlined'
+                onClick={() => handleNavigation('/signup')}
+                sx={{ m: 1, width: 0.5 }}
+              >
+                Signup
+              </Button>
+            )}
             {user ? (
               <Button
                 variant='outlined'
