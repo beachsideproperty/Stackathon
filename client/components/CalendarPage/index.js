@@ -39,7 +39,7 @@ const CalendarPage = () => {
 
   const getTileClassName = ({ date }) => {
     const mood = getMoodForDate(date);
-    return mood ? `mood-${mood}` : '';
+    return mood ? `mood-${mood}` : 'no-mood';
   };
 
   return (
@@ -95,7 +95,7 @@ const CalendarPage = () => {
             tileClassName={getTileClassName}
             tileContent={({ date }) => {
               const mood = getMoodForDate(date);
-              return mood ? (
+              return mood !== null ? (
                 <Tooltip
                   title={mood}
                   placement='top'
@@ -103,18 +103,7 @@ const CalendarPage = () => {
                   zIndex={999}
                   enterDelay={0}
                 >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      height: '100%',
-                    }}
-                  >
-                    <span role='img' aria-label='mood'>
-                      {mood}
-                    </span>
-                  </Box>
+                  <span>: {mood}</span>
                 </Tooltip>
               ) : null;
             }}

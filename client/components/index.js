@@ -1,5 +1,5 @@
 import { AuthForm } from './AuthForm';
-import { Dashboard } from './Dashboard';
+import Dashboard from './Dashboard';
 import Home from './Home';
 import Navbar from './Navbar';
 import CloudGame from './CloudGame';

@@ -186,7 +186,7 @@ export default function HamburgerMenu(props) {
                 <ListItemIcon>
                   <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Chill Zone' />
+                <ListItemText primary='Clouds' />
               </ListItemButton>
             </Box>
           ) : (
@@ -205,7 +205,7 @@ export default function HamburgerMenu(props) {
                 <ListItemIcon>
                   <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Chill Zone' />
+                <ListItemText primary='Clouds' />
               </ListItemButton>
             </Box>
           )}
