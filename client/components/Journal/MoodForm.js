@@ -65,13 +65,13 @@ const MoodForm = (props) => {
           <FormControl fullWidth>
             <FormLabel htmlFor='mood'>Mood:</FormLabel>
             <Select id='mood' value={selectedMood} onChange={handleMoodChange}>
-              <MenuItem value='elated'>Elated</MenuItem>
-              <MenuItem value='happy'> Happy</MenuItem>
-              <MenuItem value='content'>Content</MenuItem>
-              <MenuItem value='so-so'>So-so</MenuItem>
-              <MenuItem value='frustrated'>Annoyed</MenuItem>
-              <MenuItem value='unhappy'>Unhappy</MenuItem>
-              <MenuItem value='despondent'>Despondent</MenuItem>
+              <MenuItem value='Elated'>Elated</MenuItem>
+              <MenuItem value='Happy'> Happy</MenuItem>
+              <MenuItem value='Content'>Content</MenuItem>
+              <MenuItem value='So-so'>So-so</MenuItem>
+              <MenuItem value='Annoyed'>Annoyed</MenuItem>
+              <MenuItem value='Unhappy'>Unhappy</MenuItem>
+              <MenuItem value='Despondent'>Despondent</MenuItem>
             </Select>
           </FormControl>
         </Box>
