@@ -7,6 +7,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
+import rocks from '../../rocks.png';
 
 const bull = (
   <Box
@@ -35,19 +36,57 @@ const card = (
         {'"a benevolent smile"'}
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button size='small'>Learn More</Button>
-    </CardActions>
   </React.Fragment>
 );
 
 const DailyWord = () => {
   return (
-    <Box sx={{ minWidth: 275 }}>
-      <Card variant='outlined'>{card}</Card>
-      <Card variant='outlined'>{card}</Card>
-      <Card variant='outlined'>{card}</Card>
-      <Card variant='outlined'>{card}</Card>
+    <Box
+      sx={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflow: 'hidden',
+        '& img': {
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          minWidth: '100%',
+          minHeight: '100%',
+          width: 'auto',
+          height: 'auto',
+          transform: 'translate(-50%, -50%)',
+        },
+      }}
+    >
+      <img
+        src={rocks}
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          zIndex: -1,
+        }}
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          minHeight: '100vh',
+          padding: '2rem',
+          maxWidth: '800px',
+          margin: '0 auto',
+          marginTop: '40px',
+        }}
+      >
+        <Box sx={{ minWidth: 500 }}>
+          <Card variant='outlined'>{card}</Card>
+        </Box>
+      </Box>
     </Box>
   );
 };

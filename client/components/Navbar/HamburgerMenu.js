@@ -131,7 +131,7 @@ export default function HamburgerMenu(props) {
           sx={{
             p: 2,
             height: 1,
-            backgroundColor: '#f1e8f4',
+            backgroundColor: '#F5F9E7',
           }}
         >
           <IconButton sx={{ mb: 2 }} onClick={closeDrawer}>
@@ -154,12 +154,12 @@ export default function HamburgerMenu(props) {
 
               <ListItemButton
                 button
-                onClick={() => handleNavigation('/calendar')}
+                onClick={() => handleNavigation('/meditate')}
               >
                 <ListItemIcon>
-                  <ScheduleIcon sx={{ color: 'analogous.main2' }} />
+                  <SelfImprovementIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Calendar' />
+                <ListItemText primary='Meditate' />
               </ListItemButton>
 
               <ListItemButton
@@ -169,24 +169,24 @@ export default function HamburgerMenu(props) {
                 <ListItemIcon>
                   <CreateIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Journal' />
+                <ListItemText primary='Check-in' />
               </ListItemButton>
 
               <ListItemButton
                 button
-                onClick={() => handleNavigation('/meditate')}
+                onClick={() => handleNavigation('/calendar')}
               >
                 <ListItemIcon>
-                  <SelfImprovementIcon sx={{ color: 'analogous.main2' }} />
+                  <ScheduleIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Meditate' />
+                <ListItemText primary='Calendar' />
               </ListItemButton>
 
               <ListItemButton button onClick={() => handleNavigation('/cloud')}>
                 <ListItemIcon>
                   <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Cloud Game' />
+                <ListItemText primary='Chill Zone' />
               </ListItemButton>
             </Box>
           ) : (
@@ -205,7 +205,7 @@ export default function HamburgerMenu(props) {
                 <ListItemIcon>
                   <SportsCricketIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Cloud Game' />
+                <ListItemText primary='Chill Zone' />
               </ListItemButton>
             </Box>
           )}
@@ -226,11 +226,11 @@ export default function HamburgerMenu(props) {
               <Button
                 variant='outlined'
                 onClick={() => {
-                  handleNavigation('/dashboard');
+                  handleNavigation('/wotd');
                 }}
                 sx={{ m: 1, width: 0.5 }}
               >
-                Account
+                Random
               </Button>
             ) : (
               <Button

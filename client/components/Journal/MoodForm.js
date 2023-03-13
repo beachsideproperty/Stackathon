@@ -38,13 +38,25 @@ const MoodForm = (props) => {
         userId: user.id,
       })
     );
+    setShowTooltip(true);
   };
 
   useEffect(() => {
-    if (selectedMood && submitted) {
-      setSubmitted(false);
+    if (showTooltip) {
+      const timeoutId = setTimeout(() => {
+        setShowTooltip(false);
+      }, 3000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
-  }, [selectedMood, submitted]);
+  }, [showTooltip]);
+
+  useEffect(() => {
+    if (!showTooltip) {
+      setShowTooltip(false);
+    }
+  }, [showTooltip]);
 
   return (
     <Box>
@@ -64,13 +76,22 @@ const MoodForm = (props) => {
           </FormControl>
         </Box>
         <Box sx={{ mt: 2 }}>
-          <Button
-            variant='outlined'
-            onClick={handleSaveMood}
-            disabled={!selectedMood}
+          <Tooltip
+            title='Thanks for sharing'
+            placement='bottom'
+            open={showTooltip}
+            onClose={() => setShowTooltip(false)}
           >
-            Submit
-          </Button>
+            <span>
+              <Button
+                variant='outlined'
+                onClick={handleSubmit}
+                disabled={!selectedMood}
+              >
+                Submit
+              </Button>
+            </span>
+          </Tooltip>
         </Box>
       </form>
     </Box>
