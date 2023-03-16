@@ -77,7 +77,7 @@ const MoodForm = (props) => {
         </Box>
         <Box sx={{ mt: 2 }}>
           <Tooltip
-            title='Thanks for sharing'
+            title='Thanks for sharing!'
             placement='bottom'
             open={showTooltip}
             onClose={() => setShowTooltip(false)}
