@@ -4,7 +4,6 @@ const {
 } = require('../../db');
 const { requireToken } = require('../middleware');
 const { verifyPassword, generateToken } = require('../../utils');
-const { stripe } = require('../../utils');
 
 router.post('/login', async (req, res, next) => {
   try {
@@ -52,14 +51,6 @@ router.post('/signup', async (req, res, next) => {
     }
 
     const user = await User.create({ email, password, firstName, lastName });
-
-    if (user.role === 'customer') {
-      const stripeCustomer = await stripe.customers.create({
-        name: `${firstName} ${lastName}`,
-        email: email,
-      });
-      await user.update({ stripeId: stripeCustomer.id });
-    }
 
     res.send({ token: generateToken(user.id, user.role) });
   } catch (err) {

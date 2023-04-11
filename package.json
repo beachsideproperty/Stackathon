@@ -27,8 +27,6 @@
     "@mui/material": "^5.11.12",
     "@mui/x-date-pickers": "^6.0.1",
     "@reduxjs/toolkit": "^1.9.3",
-    "@stripe/react-stripe-js": "^1.16.5",
-    "@stripe/stripe-js": "^1.48.0",
     "bcrypt": "^5.0.0",
     "bootstrap": "^5.2.3",
     "compression": "^1.7.3",
@@ -46,7 +44,6 @@
     "react-calendar": "^4.0.0",
     "react-test-renderer": "^18.2.0",
     "sequelize": "^6.20.0",
-    "stripe": "^11.13.0",
     "tweedle.js": "^2.0.1"
   },
   "devDependencies": {
