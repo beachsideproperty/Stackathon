@@ -226,7 +226,7 @@ export default function HamburgerMenu(props) {
               <Button
                 variant='outlined'
                 onClick={() => {
-                  handleNavigation('/wotd');
+                  handleNavigation('/');
                 }}
                 sx={{ m: 1, width: 0.5 }}
               >
