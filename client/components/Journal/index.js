@@ -79,7 +79,6 @@ const Journal = () => {
           alignItems: 'center',
           minHeight: '100vh',
           padding: '2rem',
-          maxWidth: '800px',
           margin: '0 auto',
           marginTop: '40px',
         }}
