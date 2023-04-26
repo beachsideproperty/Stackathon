@@ -19,11 +19,21 @@ router.post('/', requireToken, async (req, res, next) => {
   try {
     const { mood, date, userId } = req.body;
 
-    const newMood = await Mood.create({
-      mood,
-      date,
-      userId,
+    const [newMood, created] = await Mood.findOrCreate({
+      where: {
+        date,
+        userId,
+      },
+      defaults: {
+        mood,
+        date,
+        userId,
+      },
     });
+
+    if (!created) {
+      newMood = await newMood.update({ mood });
+    }
 
     res.status(201).json({ mood: newMood });
   } catch (error) {

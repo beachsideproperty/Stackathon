@@ -25,12 +25,8 @@ const CalendarPage = () => {
   }, [initialValue]);
 
   const handleDateChange = (newValue) => {
-    setValue(newValue);
-    const newFormattedDate = newValue.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    });
+    setInitialValue(newValue);
+    const newFormattedDate = format(newValue, 'yyyy-MM-dd');
     setFormattedDate(newFormattedDate);
   };
 
@@ -85,7 +81,10 @@ const CalendarPage = () => {
       >
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Box>
-            <MoodCalendar value={initialValue} onChange={handleDateChange} />
+            <MoodCalendar
+              initialValue={initialValue}
+              onDateChange={handleDateChange}
+            />
             <MoodForm formattedDate={formattedDate} />
           </Box>
         </LocalizationProvider>

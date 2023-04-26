@@ -21,12 +21,12 @@ export const createMood = createAsyncThunk(
   'createMood',
   async ({ mood, date, userId }) => {
     try {
-      const { data: newMood } = await axios.post('/api/moods', {
+      const { data: newestMood } = await axios.post('/api/moods', {
         mood,
         date,
         userId,
       });
-      return { newMood };
+      return { newestMood };
     } catch (error) {
       console.error('Unable to create mood.', error);
       return { error };
@@ -64,7 +64,14 @@ const moodSlice = createSlice({
         }
         return { ...state, error: errorMessage };
       }
-      state.allMoods.push(payload.newMood);
+      const existingMoodIndex = state.allMoods.findIndex(
+        (mood) => mood.id === payload.newestMood.id
+      );
+      if (existingMoodIndex >= 0) {
+        state.allMoods[existingMoodIndex] = payload.newestMood;
+      } else {
+        state.allMoods.push(payload.newestMood);
+      }
     });
     builder.addCase(deleteMood.fulfilled, (state, { payload }) => {
       state.allMoods = state.allMoods.filter((mood) => mood.id !== payload.id);

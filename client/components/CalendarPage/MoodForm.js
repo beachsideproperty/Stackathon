@@ -11,7 +11,9 @@ const MoodForm = (props) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchAllMoods(formattedDate));
+    if (formattedDate) {
+      dispatch(fetchAllMoods(formattedDate));
+    }
   }, [dispatch, formattedDate]);
 
   const handleMoodClick = (mood) => {
