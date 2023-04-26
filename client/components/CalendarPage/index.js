@@ -1,46 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import calendarVideo from '../../calendarVideo.mp4';
-import { Box, Tooltip } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import Calendar from 'react-calendar';
+import { Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import theme from '../../theme';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { useNavigate } from 'react-router-dom';
+import MoodForm from './MoodForm';
+import calendarVideo from '../../calendarVideo.mp4';
 import { fetchAllMoods } from '../../store/slices/moods';
+import { format } from 'date-fns';
+import MoodCalendar from './MoodCalendar';
 
 const CalendarPage = () => {
-  const [value, setValue] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
-  const moods = useSelector((state) => state.moods.allMoods);
+  const navigate = useNavigate();
+  const [initialValue, setInitialValue] = useState(new Date());
+  const [formattedDate, setFormattedDate] = useState('');
+  const user = useSelector((state) => state.auth.user);
+  const moods = useSelector((state) => state.moods.moods);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllMoods());
-  }, [dispatch]);
+    const formattedDate = format(initialValue, 'yyyy-MM-dd');
+    setFormattedDate(formattedDate);
+    dispatch(fetchAllMoods(formattedDate));
+  }, [initialValue]);
 
-  const handleDateChange = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-    const mood = moods.find((mood) => mood.date === formattedDate);
-
-    setSelectedDate(mood ? formattedDate : null);
+  const handleDateChange = (newValue) => {
+    setValue(newValue);
+    const newFormattedDate = newValue.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    setFormattedDate(newFormattedDate);
   };
 
-  const getMoodForDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-    const mood = moods.find((mood) => mood.date === formattedDate);
-
-    return mood ? mood.mood : null;
-  };
-
-  const getTileClassName = ({ date }) => {
-    const mood = getMoodForDate(date);
-    return mood ? `mood-${mood}` : 'no-mood';
-  };
+  if (!user) {
+    navigate('/');
+  }
 
   return (
     <Box
@@ -83,32 +79,16 @@ const CalendarPage = () => {
           alignItems: 'center',
           minHeight: '100vh',
           padding: '2rem',
-          maxWidth: '800px',
           margin: '0 auto',
           marginTop: '40px',
         }}
       >
-        <ThemeProvider theme={theme}>
-          <Calendar
-            value={value}
-            onChange={handleDateChange}
-            tileClassName={getTileClassName}
-            tileContent={({ date }) => {
-              const mood = getMoodForDate(date);
-              return mood !== null ? (
-                <Tooltip
-                  title={mood}
-                  placement='top'
-                  arrow
-                  zIndex={999}
-                  enterDelay={0}
-                >
-                  <span>: {mood}</span>
-                </Tooltip>
-              ) : null;
-            }}
-          />
-        </ThemeProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Box>
+            <MoodCalendar value={initialValue} onChange={handleDateChange} />
+            <MoodForm formattedDate={formattedDate} />
+          </Box>
+        </LocalizationProvider>
       </Box>
     </Box>
   );

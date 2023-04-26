@@ -9,7 +9,6 @@ import {
   CalendarPage,
   Meditate,
   Journal,
-  MoodForm,
 } from './components';
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
@@ -29,7 +28,6 @@ const Router = ({}) => {
       <Routes>
         <Route exact path='/login' element={<AuthForm mode='login' />} />
         <Route exact path='/signup' element={<AuthForm mode='signup' />} />
-        <Route path='/mood-form/:date' element={<MoodForm />} />
         <Route path='/journal' element={<Journal />} />
         <Route path='/meditate' element={<Meditate />} />
         <Route path='/calendar' element={<CalendarPage />} />

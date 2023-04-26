@@ -1,42 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Box } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
+import React from 'react';
+import { Box, Button, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { useNavigate } from 'react-router-dom';
-import MoodForm from './MoodForm';
 import calendarVideo from '../../calendarVideo.mp4';
-import { fetchAllMoods } from '../../store/slices/moods';
-import { format } from 'date-fns';
 
 const Journal = () => {
-  const navigate = useNavigate();
-  const [value, setValue] = useState(new Date());
-  const [formattedDate, setFormattedDate] = useState('');
   const user = useSelector((state) => state.auth.user);
   const moods = useSelector((state) => state.moods.moods);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const formattedDate = format(value, 'yyyy-MM-dd');
-    setFormattedDate(formattedDate);
-    dispatch(fetchAllMoods(formattedDate));
-  }, [value]);
-
-  const handleDateChange = (newValue) => {
-    setValue(newValue);
-    const newFormattedDate = newValue.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    });
-    setFormattedDate(newFormattedDate);
-  };
-
-  if (!user) {
-    navigate('/');
-  }
 
   return (
     <Box
@@ -77,23 +47,43 @@ const Journal = () => {
           flexDirection: 'column',
           justifyContent: 'flex-start',
           alignItems: 'center',
-          minHeight: '100vh',
-          padding: '2rem',
-          margin: '0 auto',
           marginTop: '40px',
         }}
       >
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <Box>
-            <DatePicker
-              label='Pick a date'
-              value={value}
-              onChange={handleDateChange}
-              textFieldProps={{ variant: 'outlined' }}
-            />
-            <MoodForm formattedDate={formattedDate} />
-          </Box>
-        </LocalizationProvider>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '70vh',
+            width: '40vh',
+            border: 1,
+            borderRadius: 5,
+            marginTop: 5,
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          }}
+        >
+          <Typography variant='overline' fontSize='16px' display='block'>
+            Journal:
+          </Typography>
+          <textarea
+            aria-label='empty textarea'
+            placeholder='What am I feeling and why?'
+            rows={35}
+            style={{
+              width: '80%',
+              padding: '10px',
+              border: '1px solid #ccc',
+              borderRadius: '5px',
+              resize: 'none',
+              margin: '10px',
+            }}
+          />
+          <Button variant='outlined' color='secondary'>
+            submit
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

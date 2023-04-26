@@ -164,22 +164,22 @@ export default function HamburgerMenu(props) {
 
               <ListItemButton
                 button
-                onClick={() => handleNavigation('/journal')}
-              >
-                <ListItemIcon>
-                  <CreateIcon sx={{ color: 'analogous.main2' }} />
-                </ListItemIcon>
-                <ListItemText primary='Check-in' />
-              </ListItemButton>
-
-              <ListItemButton
-                button
                 onClick={() => handleNavigation('/calendar')}
               >
                 <ListItemIcon>
                   <ScheduleIcon sx={{ color: 'analogous.main2' }} />
                 </ListItemIcon>
-                <ListItemText primary='Calendar' />
+                <ListItemText primary='Moods' />
+              </ListItemButton>
+
+              <ListItemButton
+                button
+                onClick={() => handleNavigation('/journal')}
+              >
+                <ListItemIcon>
+                  <CreateIcon sx={{ color: 'analogous.main2' }} />
+                </ListItemIcon>
+                <ListItemText primary='Journal' />
               </ListItemButton>
 
               <ListItemButton button onClick={() => handleNavigation('/cloud')}>

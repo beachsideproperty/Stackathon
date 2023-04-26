@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Button, Snackbar, Typography, TextField } from '@mui/material';
+import { Box, Button, Snackbar, Typography } from '@mui/material';
 import { fetchAllMoods, createMood } from '../../store/slices/moods';
 
 const MoodForm = (props) => {
@@ -117,26 +117,6 @@ const MoodForm = (props) => {
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           />
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          height: '8rem',
-          border: 1,
-          borderRadius: 5,
-          marginTop: 5,
-        }}
-      >
-        <Typography variant='overline' fontSize='16px' display='block'>
-          Elaborate:
-        </Typography>
-        <TextField placeholder='Why?' variant='outlined' color='secondary' />
-        <Button variant='outlined' color='secondary'>
-          submit
-        </Button>
       </Box>
     </Box>
   );
