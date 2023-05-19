@@ -49,6 +49,11 @@ const MoodCalendar = ({ onDateChange }) => {
     return classes.join(' ');
   };
 
+  const getTileContent = ({ date }) => {
+    const mood = getMoodForDate(date);
+    return <>{mood !== null ? <span>: {mood}</span> : ''}</>;
+  };
+
   return (
     <Box
       sx={{
@@ -66,10 +71,7 @@ const MoodCalendar = ({ onDateChange }) => {
           value={value}
           onChange={handleDateChange}
           tileClassName={getTileClassName}
-          tileContent={({ date }) => {
-            const mood = getMoodForDate(date);
-            return mood !== null ? <span>: {mood}</span> : null;
-          }}
+          tileContent={getTileContent}
         />
       </CalendarTile>
     </Box>
