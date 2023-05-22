@@ -74,7 +74,7 @@ const CloudGame = () => {
         <Box
           ref={containerRef}
           sx={{
-            width: '90vw',
+            width: '70vw',
             aspectRatio: '16 / 9',
             border: '2px solid pink',
             boxSizing: 'border-box',
