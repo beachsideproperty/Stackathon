@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import calendarVideo from '../../calendarVideo.mp4';
@@ -7,6 +7,18 @@ const Journal = () => {
   const user = useSelector((state) => state.auth.user);
   const moods = useSelector((state) => state.moods.moods);
   const dispatch = useDispatch();
+
+  const [entry, setEntry] = useState('');
+  const [journalEntries, setJournalEntries] = useState([]);
+
+  const handleSubmitEntry = () => {
+    setJournalEntries([...journalEntries, entry]);
+    setEntry('');
+  };
+
+  const handleClearEntries = () => {
+    setJournalEntries([]);
+  };
 
   return (
     <Box
@@ -56,21 +68,25 @@ const Journal = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '70vh',
+            height: '50vh',
             width: '40vh',
             border: 1,
             borderRadius: 5,
             marginTop: 5,
+            paddingTop: 2,
+            paddingBottom: 2,
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
           }}
         >
           <Typography variant='overline' fontSize='16px' display='block'>
-            Journal:
+            Talk to yourself:
           </Typography>
           <textarea
             aria-label='empty textarea'
             placeholder='What am I feeling and why?'
-            rows={35}
+            rows={25}
+            value={entry}
+            onChange={(e) => setEntry(e.target.value)}
             style={{
               width: '80%',
               padding: '10px',
@@ -80,9 +96,49 @@ const Journal = () => {
               margin: '10px',
             }}
           />
-          <Button variant='outlined' color='secondary'>
-            submit
-          </Button>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              gap: 2,
+            }}
+          >
+            <Button
+              variant='outlined'
+              color='secondary'
+              onClick={handleSubmitEntry}
+            >
+              submit
+            </Button>
+            <Button
+              variant='outlined'
+              color='secondary'
+              onClick={handleClearEntries}
+            >
+              clear
+            </Button>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '30vh',
+            width: '40vh',
+            border: 1,
+            borderRadius: 5,
+            marginTop: 2,
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          }}
+        >
+          {journalEntries.map((entry, index) => (
+            <Box key={index}>
+              <Typography variant='body1'>{entry}</Typography>
+            </Box>
+          ))}
         </Box>
       </Box>
     </Box>
