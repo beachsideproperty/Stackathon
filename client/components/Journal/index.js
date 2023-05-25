@@ -132,10 +132,21 @@ const Journal = () => {
             borderRadius: 5,
             marginTop: 2,
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            overflowY: 'auto',
           }}
         >
           {journalEntries.map((entry, index) => (
-            <Box key={index}>
+            <Box
+              key={index}
+              sx={{
+                width: '80%',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                padding: '10px',
+                backgroundColor: '#fff',
+                marginBottom: 2,
+              }}
+            >
               <Typography variant='body1'>{entry}</Typography>
             </Box>
           ))}
