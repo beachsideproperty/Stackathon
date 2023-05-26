@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import HamburgerMenu from './HamburgerMenu.js';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
-
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (event) => {

@@ -12,10 +12,7 @@ import {
   Link,
   Paper,
 } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
 import rocks from '../snow_mountain.mp4';
-
-const theme = createTheme();
 
 const AuthForm = ({ mode }) => {
   const navigate = useNavigate();

@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { useNavigate } from 'react-router-dom';
-import MoodForm from './MoodForm';
-import calendarVideo from '../../calendarVideo.mp4';
 import { fetchAllMoods } from '../../store/slices/moods';
 import { format } from 'date-fns';
+import Wrapper from '../style.js';
+import MoodForm from './MoodForm';
 import MoodCalendar from './MoodCalendar';
+import calendarVideo from '../../calendarVideo.mp4';
 
 const CalendarPage = () => {
   const navigate = useNavigate();
   const [initialValue, setInitialValue] = useState(new Date());
   const [formattedDate, setFormattedDate] = useState('');
   const user = useSelector((state) => state.auth.user);
-  const moods = useSelector((state) => state.moods.moods);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,38 +35,7 @@ const CalendarPage = () => {
   }
 
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        overflow: 'hidden',
-        '& video': {
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          minWidth: '100%',
-          minHeight: '100%',
-          width: 'auto',
-          height: 'auto',
-          transform: 'translate(-50%, -50%)',
-        },
-      }}
-    >
-      <video
-        src={calendarVideo}
-        autoPlay
-        loop
-        muted
-        style={{
-          objectFit: 'cover',
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-        }}
-      />
+    <Wrapper videoSrc={calendarVideo}>
       <Box
         sx={{
           display: 'flex',
@@ -89,7 +58,7 @@ const CalendarPage = () => {
           </Box>
         </LocalizationProvider>
       </Box>
-    </Box>
+    </Wrapper>
   );
 };
 

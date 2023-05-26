@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import videoClouds from '../../cloudVideo.mp4';
+import Wrapper from '../style.js';
 
 const CloudGame = () => {
   const user = useSelector((state) => state.auth.user);
@@ -37,32 +38,7 @@ const CloudGame = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        overflow: 'hidden',
-      }}
-    >
-      <video
-        src={videoClouds}
-        autoPlay
-        loop
-        muted
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          objectFit: 'cover',
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-        }}
-      />
+    <Wrapper videoSrc={videoClouds}>
       <Box
         sx={{
           display: 'flex',
@@ -81,7 +57,7 @@ const CloudGame = () => {
           }}
         ></Box>
       </Box>
-    </Box>
+    </Wrapper>
   );
 };
 

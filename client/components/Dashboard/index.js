@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
-import oceanVideo from '../oceanVideo.mp4';
+import oceanVideo from '../../oceanVideo.mp4';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,13 +10,14 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import blonde from '../blonde.png';
-import pink from '../pink_white.mp3';
+import blonde from '../../blonde.png';
+import pink from '../../pink_white.mp3';
 import { Link } from 'react-router-dom';
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import CreateIcon from '@mui/icons-material/Create';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
+import Wrapper from '../style.js';
 
 const LinkCard = ({ title, icon, link }) => (
   <Card
@@ -66,38 +67,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        overflow: 'hidden',
-        '& video': {
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          minWidth: '100%',
-          minHeight: '100%',
-          width: 'auto',
-          height: 'auto',
-          transform: 'translate(-50%, -50%)',
-        },
-      }}
-    >
-      <video
-        src={oceanVideo}
-        autoPlay
-        loop
-        muted
-        style={{
-          objectFit: 'cover',
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-        }}
-      />
+    <Wrapper videoSrc={oceanVideo}>
       <Box
         sx={{
           display: 'flex',
@@ -207,7 +177,7 @@ const Dashboard = () => {
           </Card>
         </Box>
       </Box>
-    </Box>
+    </Wrapper>
   );
 };
 
