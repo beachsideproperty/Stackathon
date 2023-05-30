@@ -13,16 +13,12 @@ import {
   PlayArrow as PlayArrowIcon,
   Pause as PauseIcon,
   SkipNext as SkipNextIcon,
-  SportsCricket as SportsCricketIcon,
-  Schedule as ScheduleIcon,
-  Create as CreateIcon,
-  SelfImprovement as SelfImprovementIcon,
 } from '@mui/icons-material';
 import oceanVideo from '../../oceanVideo.mp4';
 import blonde from '../../blonde.png';
 import pink from '../../pink_white.mp3';
 import Wrapper from '../style.js';
-import LinkCard from './LinkCard';
+import { LinkCard, linkCardsData } from './LinkCard';
 
 const Dashboard = () => {
   const user = useSelector((state) => state.auth.user);
@@ -34,12 +30,24 @@ const Dashboard = () => {
     setIsPlaying(!isPlaying);
   };
 
+  const createIconButton = (label, handleClick, icon) => (
+    <IconButton aria-label={label} onClick={handleClick}>
+      {icon}
+    </IconButton>
+  );
+
+  const createTypography = (variant, color, component, text) => (
+    <Typography variant={variant} color={color} component={component}>
+      {text}
+    </Typography>
+  );
+
   return (
     <Wrapper videoSrc={oceanVideo}>
       <Box
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           padding: '2rem',
@@ -50,91 +58,63 @@ const Dashboard = () => {
       >
         <Box
           sx={{
-            height: '50vh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             opacity: 0.8,
           }}
         >
-          <Card sx={{ display: 'flex', flex: 1, pb: 4 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <CardContent sx={{ flex: '1 0 auto' }}>
-                <Typography variant='h6' color='secondary' component='div'>
-                  {user
-                    ? `Welcome back,
-                    ${user.firstName}!`
-                    : 'Join to create your dashboard'}
-                </Typography>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    opacity: 0.8,
-                  }}
-                >
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <LinkCard
-                      title='Meditate'
-                      icon={<SelfImprovementIcon />}
-                      link='/meditate'
-                    />
-                    <LinkCard
-                      title='Mood'
-                      icon={<CreateIcon />}
-                      link='/journal'
-                    />
-                  </Box>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <LinkCard
-                      title='Calendar'
-                      icon={<ScheduleIcon />}
-                      link='/calendar'
-                    />
-                    <LinkCard
-                      title='Game'
-                      icon={<SportsCricketIcon />}
-                      link='/cloud'
-                    />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Box>
-          </Card>
+          <Box sx={{ display: 'flex', flex: 1 }}>
+            <CardContent sx={{ flex: '1 0 auto' }}>
+              <Typography variant='h6' color='secondary' component='div'>
+                Welcome back, {user.firstName}!
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  opacity: 0.8,
+                }}
+              >
+                {linkCardsData.map((card) => (
+                  <LinkCard
+                    key={card.title}
+                    title={card.title}
+                    icon={card.icon}
+                    link={card.link}
+                  />
+                ))}
+              </Box>
+            </CardContent>
+          </Box>
 
           <Card sx={{ display: 'flex', flex: 1 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <CardContent sx={{ flex: '1 0 auto' }}>
-                <Typography component='div' variant='h5'>
-                  Pink + White
-                </Typography>
-                <Typography
-                  variant='subtitle1'
-                  color='text.secondary'
-                  component='div'
+                {createTypography('h5', null, 'div', 'Pink + White')}
+                {createTypography(
+                  'subtitle1',
+                  'text.secondary',
+                  'div',
+                  'Frank Ocean'
+                )}
+                <Box
+                  sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}
                 >
-                  Frank Ocean
-                </Typography>
-              </CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                <IconButton aria-label='previous'>
-                  <SkipPreviousIcon />
-                </IconButton>
-                <IconButton
-                  button='true'
-                  aria-label='play/pause'
-                  onClick={handlePlayPause}
-                >
-                  {isPlaying ? (
-                    <PauseIcon sx={{ height: 38, width: 38 }} />
-                  ) : (
-                    <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+                  {createIconButton('previous', null, <SkipPreviousIcon />)}
+                  {createIconButton(
+                    'play/pause',
+                    handlePlayPause,
+                    isPlaying ? (
+                      <PauseIcon sx={{ height: 38, width: 38 }} />
+                    ) : (
+                      <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+                    )
                   )}
-                </IconButton>
-                <IconButton aria-label='next'>
-                  <SkipNextIcon />
-                </IconButton>
-              </Box>
+                  {createIconButton('next', null, <SkipNextIcon />)}
+                </Box>
+              </CardContent>
             </Box>
             <CardMedia
               component='img'

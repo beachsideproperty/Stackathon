@@ -1,6 +1,12 @@
 import React from 'react';
 import { Card, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import {
+  SportsCricket as SportsCricketIcon,
+  Schedule as ScheduleIcon,
+  Create as CreateIcon,
+  SelfImprovement as SelfImprovementIcon,
+} from '@mui/icons-material';
 import CardContent from '@mui/material/CardContent';
 
 const LinkCard = ({ title, icon, link }) => (
@@ -34,4 +40,11 @@ const LinkCard = ({ title, icon, link }) => (
   </Card>
 );
 
-export default LinkCard;
+const linkCardsData = [
+  { title: 'Meditate', icon: <SelfImprovementIcon />, link: '/meditate' },
+  { title: 'Mood', icon: <CreateIcon />, link: '/journal' },
+  { title: 'Calendar', icon: <ScheduleIcon />, link: '/calendar' },
+  { title: 'Game', icon: <SportsCricketIcon />, link: '/cloud' },
+];
+
+export { LinkCard, linkCardsData };
