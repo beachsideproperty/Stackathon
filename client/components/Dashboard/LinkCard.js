@@ -12,7 +12,6 @@ import CardContent from '@mui/material/CardContent';
 const LinkCard = ({ title, icon, link }) => (
   <Card
     sx={{
-      width: { xs: '50%', md: 'auto' },
       m: 1,
       borderRadius: '10px',
     }}

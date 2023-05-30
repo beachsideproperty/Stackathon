@@ -64,9 +64,16 @@ const Dashboard = () => {
             opacity: 0.8,
           }}
         >
-          <Box sx={{ display: 'flex', flex: 1 }}>
+          <Box
+            sx={{ display: 'flex', flex: 1, border: '2px solid black', mb: 4 }}
+          >
             <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography variant='h6' color='secondary' component='div'>
+              <Typography
+                variant='caption'
+                color='white'
+                component='div'
+                sx={{ textAlign: 'center', fontSize: '1.5rem' }}
+              >
                 Welcome back, {user.firstName}!
               </Typography>
               <Box
