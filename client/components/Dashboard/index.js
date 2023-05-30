@@ -69,10 +69,14 @@ const Dashboard = () => {
           >
             <CardContent sx={{ flex: '1 0 auto' }}>
               <Typography
-                variant='caption'
+                variant='button'
                 color='white'
                 component='div'
-                sx={{ textAlign: 'center', fontSize: '1.5rem' }}
+                sx={{
+                  textAlign: 'center',
+                  fontSize: '1.25rem',
+                  textShadow: '3px 3px 0 black',
+                }}
               >
                 Welcome back, {user.firstName}!
               </Typography>
