@@ -13,6 +13,20 @@ import {
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
 
+const routeConfig = [
+  { path: '/login', element: <AuthForm mode='login' />, exact: true },
+  { path: '/signup', element: <AuthForm mode='signup' />, exact: true },
+  { path: '/meditate', element: <Meditate /> },
+  { path: '/cloud', element: <CloudGame /> },
+];
+
+const userRoutes = [
+  ...routeConfig,
+  { path: '/journal', element: <Journal /> },
+  { path: '/calendar', element: <CalendarPage /> },
+  { path: '/dashboard', element: <Dashboard /> },
+];
+
 const Router = ({}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -23,30 +37,16 @@ const Router = ({}) => {
     }
   }, []);
 
-  if (user) {
-    return (
-      <Routes>
-        <Route exact path='/login' element={<AuthForm mode='login' />} />
-        <Route exact path='/signup' element={<AuthForm mode='signup' />} />
-        <Route path='/journal' element={<Journal />} />
-        <Route path='/meditate' element={<Meditate />} />
-        <Route path='/calendar' element={<CalendarPage />} />
-        <Route path='/cloud' element={<CloudGame />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='*' element={<Home />} />
-      </Routes>
-    );
-  } else {
-    return (
-      <Routes>
-        <Route exact path='/login' element={<AuthForm mode='login' />} />
-        <Route exact path='/signup' element={<AuthForm mode='signup' />} />
-        <Route path='/meditate' element={<Meditate />} />
-        <Route path='/cloud' element={<CloudGame />} />
-        <Route path='*' element={<Home />} />
-      </Routes>
-    );
-  }
+  const routes = user ? userRoutes : routeConfig;
+
+  return (
+    <Routes>
+      {routes.map(({ path, element, exact }) => (
+        <Route path={path} element={element} exact={exact} />
+      ))}
+      <Route path='*' element={<Home />} />
+    </Routes>
+  );
 };
 
 export default Router;

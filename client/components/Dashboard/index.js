@@ -1,69 +1,37 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Typography } from '@mui/material';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from '@mui/material';
+import {
+  SkipPrevious as SkipPreviousIcon,
+  PlayArrow as PlayArrowIcon,
+  Pause as PauseIcon,
+  SkipNext as SkipNextIcon,
+  SportsCricket as SportsCricketIcon,
+  Schedule as ScheduleIcon,
+  Create as CreateIcon,
+  SelfImprovement as SelfImprovementIcon,
+} from '@mui/icons-material';
 import oceanVideo from '../../oceanVideo.mp4';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 import blonde from '../../blonde.png';
 import pink from '../../pink_white.mp3';
-import { Link } from 'react-router-dom';
-import SportsCricketIcon from '@mui/icons-material/SportsCricket';
-import ScheduleIcon from '@mui/icons-material/Schedule';
-import CreateIcon from '@mui/icons-material/Create';
-import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import Wrapper from '../style.js';
-
-const LinkCard = ({ title, icon, link }) => (
-  <Card
-    sx={{
-      width: { xs: '50%', md: 'auto' },
-      m: 1,
-      borderRadius: '10px',
-    }}
-  >
-    <CardContent
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        p: 1,
-        pt: 2,
-      }}
-    >
-      {icon}
-      <Link to={link} style={{ textDecoration: 'none' }}>
-        <Typography
-          variant='h6'
-          component='div'
-          sx={{ ml: 1, color: '#7c9246' }}
-        >
-          {title}
-        </Typography>
-      </Link>
-    </CardContent>
-  </Card>
-);
+import LinkCard from './LinkCard';
 
 const Dashboard = () => {
   const user = useSelector((state) => state.auth.user);
-
   const [audio] = useState(new Audio(pink));
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayPause = () => {
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
-      audio.play();
-      setIsPlaying(true);
-    }
+    isPlaying ? audio.pause() : audio.play();
+    setIsPlaying(!isPlaying);
   };
 
   return (
