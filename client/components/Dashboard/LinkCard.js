@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import {
   SportsCricket as SportsCricketIcon,
@@ -7,7 +7,6 @@ import {
   Create as CreateIcon,
   SelfImprovement as SelfImprovementIcon,
 } from '@mui/icons-material';
-import CardContent from '@mui/material/CardContent';
 
 const LinkCard = ({ title, icon, link }) => (
   <Card
