@@ -32,7 +32,7 @@ router.post('/', requireToken, async (req, res, next) => {
     });
 
     if (!created) {
-      newMood = await newMood.update({ mood });
+      await newMood.update({ mood });
     }
 
     res.status(201).json({ mood: newMood });

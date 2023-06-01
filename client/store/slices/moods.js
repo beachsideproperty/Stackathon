@@ -70,7 +70,9 @@ const moodSlice = createSlice({
         state.error = errorMessage;
       } else {
         const existingMoodIndex = state.allMoods.findIndex(
-          (mood) => mood.id === payload.newestMood.id
+          (mood) =>
+            mood.date === payload.newestMood.date &&
+            mood.id === payload.newestMood.id
         );
         if (existingMoodIndex >= 0) {
           state.allMoods[existingMoodIndex] = payload.newestMood;
