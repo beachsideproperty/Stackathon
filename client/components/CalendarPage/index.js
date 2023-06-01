@@ -15,6 +15,7 @@ const CalendarPage = () => {
   const navigate = useNavigate();
   const [initialValue, setInitialValue] = useState(new Date());
   const [formattedDate, setFormattedDate] = useState('');
+  const [selectedMood, setSelectedMood] = useState(null);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -53,8 +54,13 @@ const CalendarPage = () => {
             <MoodCalendar
               initialValue={initialValue}
               onDateChange={handleDateChange}
+              selectedMood={selectedMood}
             />
-            <MoodForm formattedDate={formattedDate} />
+            <MoodForm
+              formattedDate={formattedDate}
+              selectedMood={selectedMood}
+              setSelectedMood={setSelectedMood}
+            />
           </Box>
         </LocalizationProvider>
       </Box>

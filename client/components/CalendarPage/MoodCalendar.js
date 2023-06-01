@@ -5,9 +5,8 @@ import Calendar from 'react-calendar';
 import { fetchAllMoods } from '../../store/slices/moods';
 import { formatCalendarDate, CalendarTile } from './moodTools';
 
-const MoodCalendar = ({ onDateChange }) => {
+const MoodCalendar = ({ initialValue, onDateChange }) => {
   const [value, setValue] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
   const moods = useSelector((state) => state.moods.allMoods);
   const dispatch = useDispatch();
   const [highlightedDate, setHighlightedDate] = useState(
@@ -24,7 +23,6 @@ const MoodCalendar = ({ onDateChange }) => {
 
     const mood = moods.find((mood) => mood.date === formattedDate);
 
-    setSelectedDate(mood ? formattedDate : null);
     if (onDateChange) {
       onDateChange(date);
     }
@@ -42,7 +40,7 @@ const MoodCalendar = ({ onDateChange }) => {
     const formattedDate = formatCalendarDate(date);
     const classes = [mood ? `mood-${mood}` : 'no-mood'];
 
-    if (formattedDate === highlightedDate) {
+    if (formattedDate === formatCalendarDate(initialValue)) {
       classes.push('highlighted-date');
     }
 

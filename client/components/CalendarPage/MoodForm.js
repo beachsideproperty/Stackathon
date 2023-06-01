@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Button, Snackbar, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { createMood } from '../../store/slices/moods';
 import { moodButtons } from './moodTools';
 
-const MoodForm = (props) => {
-  const { formattedDate } = props;
+const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const [selectedMood, setSelectedMood] = useState(null);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleMoodClick = (mood) => {
-    setSnackbarOpen(true);
     setSelectedMood(mood);
     dispatch(
       createMood({
@@ -81,13 +77,6 @@ const MoodForm = (props) => {
             {item.mood}
           </Button>
         ))}
-        <Snackbar
-          open={snackbarOpen}
-          autoHideDuration={1500}
-          onClose={() => setSnackbarOpen(false)}
-          message='Submitted!'
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        />
       </Box>
     </Box>
   );

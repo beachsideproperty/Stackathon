@@ -19,14 +19,19 @@ export const fetchAllMoods = createAsyncThunk('fetchAllMoods', async () => {
 
 export const createMood = createAsyncThunk(
   'createMood',
-  async ({ mood, date, userId }) => {
+  async ({ mood, date, userId }, moodie) => {
     try {
       const { data: newestMood } = await axios.post('/api/moods', {
         mood,
         date,
         userId,
       });
-      return { newestMood };
+      const fetchAction = await moodie.dispatch(fetchAllMoods());
+      if (fetchAllMoods.fulfilled.match(fetchAction)) {
+        return { newestMood };
+      } else {
+        return { error: fetchAction.error };
+      }
     } catch (error) {
       console.error('Unable to create mood.', error);
       return { error };
@@ -62,15 +67,16 @@ const moodSlice = createSlice({
         if (payload.error.response.status === 500) {
           errorMessage = 'Can not create mood.';
         }
-        return { ...state, error: errorMessage };
-      }
-      const existingMoodIndex = state.allMoods.findIndex(
-        (mood) => mood.id === payload.newestMood.id
-      );
-      if (existingMoodIndex >= 0) {
-        state.allMoods[existingMoodIndex] = payload.newestMood;
+        state.error = errorMessage;
       } else {
-        state.allMoods.push(payload.newestMood);
+        const existingMoodIndex = state.allMoods.findIndex(
+          (mood) => mood.id === payload.newestMood.id
+        );
+        if (existingMoodIndex >= 0) {
+          state.allMoods[existingMoodIndex] = payload.newestMood;
+        } else {
+          state.allMoods.push(payload.newestMood);
+        }
       }
     });
     builder.addCase(deleteMood.fulfilled, (state, { payload }) => {
