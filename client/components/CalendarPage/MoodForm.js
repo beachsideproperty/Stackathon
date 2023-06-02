@@ -37,7 +37,7 @@ const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        height: '8rem',
+        height: '10rem',
         border: 1,
         borderRadius: 5,
         marginTop: 5,
@@ -56,6 +56,7 @@ const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
           variant='overline'
           display='block'
           fontSize='16px'
+          marginRight='10px'
           gutterBottom
         >
           {user.firstName}'s Mood for {formattedDate}:
@@ -64,8 +65,8 @@ const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
           <img
             src={moodButtons.find((item) => item.mood === selectedMood).url}
             alt={selectedMood}
-            width='100'
-            height='100'
+            width='50'
+            height='50'
           />
         )}
       </Box>
@@ -84,10 +85,21 @@ const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
             variant='outlined'
             color='secondary'
             onClick={() => handleMoodClick(item.mood, item.url)}
+            sx={{ margin: 1 }}
           >
             {item.mood}
           </Button>
         ))}
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 1,
+        }}
+      >
         <Button variant='outlined' color='secondary' onClick={handleClearMood}>
           Clear
         </Button>
