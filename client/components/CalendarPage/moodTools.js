@@ -45,6 +45,11 @@ export const CalendarTile = styled('div')(() => ({
     borderImage: 'linear-gradient(to left, #555555, #FF69B4) 1',
     backgroundColor: '#f0f0f0',
   },
+  '.react-calendar__month-view__weekdays__weekday': {
+    fontWeight: 'bold',
+    fontFamily: 'Arial',
+    alignItems: 'center',
+  },
   '.mood-Elated': { backgroundColor: '#FF69B4' },
   '.mood-Happy': { backgroundColor: '#FF95C0' },
   '.mood-Content': { backgroundColor: '#FFC0CB' },
