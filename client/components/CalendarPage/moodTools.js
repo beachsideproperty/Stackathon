@@ -48,7 +48,6 @@ export const CalendarTile = styled('div')(() => ({
   '.react-calendar__month-view__weekdays__weekday': {
     fontWeight: 'bold',
     fontFamily: 'Arial',
-    alignItems: 'center',
   },
   '.mood-Elated': { backgroundColor: '#FF69B4' },
   '.mood-Happy': { backgroundColor: '#FF95C0' },
