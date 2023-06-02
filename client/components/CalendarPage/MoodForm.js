@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Button, Typography } from '@mui/material';
-import { createMood } from '../../store/slices/moods';
+import { createMood, deleteMood } from '../../store/slices/moods';
 import { moodButtons } from './moodTools';
 
 const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const moods = useSelector((state) => state.moods.allMoods);
 
   const handleMoodClick = (mood) => {
     setSelectedMood(mood);
@@ -17,6 +18,16 @@ const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
         userId: user.id,
       })
     );
+  };
+
+  const handleClearMood = () => {
+    setSelectedMood(null);
+    const moodToDelete = moods.find(
+      (mood) => mood.date === formattedDate && mood.userId === user.id
+    );
+    if (moodToDelete) {
+      dispatch(deleteMood({ id: moodToDelete.id }));
+    }
   };
 
   return (
@@ -77,6 +88,9 @@ const MoodForm = ({ formattedDate, selectedMood, setSelectedMood }) => {
             {item.mood}
           </Button>
         ))}
+        <Button variant='outlined' color='secondary' onClick={handleClearMood}>
+          Clear
+        </Button>
       </Box>
     </Box>
   );

@@ -42,4 +42,20 @@ router.post('/', requireToken, async (req, res, next) => {
   }
 });
 
+// DELETE /api/moods/:id
+router.delete('/:id', requireToken, async (req, res, next) => {
+  try {
+    const mood = await Mood.findOne({ where: { id: req.params.id } });
+    if (!mood) {
+      res.sendStatus(404);
+    } else {
+      await mood.destroy();
+      res.sendStatus(204);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;
