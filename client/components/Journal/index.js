@@ -48,7 +48,9 @@ const Journal = () => {
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
           }}
         >
-          <Typography variant='overline' fontSize='16px' display='block'>
+          {' '}
+          coming soon{' '}
+          {/* <Typography variant='overline' fontSize='16px' display='block'>
             Talk to yourself:
           </Typography>
           <textarea
@@ -119,7 +121,7 @@ const Journal = () => {
             >
               <Typography variant='body1'>{entry}</Typography>
             </Box>
-          ))}
+          ))} */}
         </Box>
       </Box>
     </Wrapper>
